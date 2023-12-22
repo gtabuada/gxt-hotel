@@ -2,7 +2,7 @@ import { createId } from "@paralleldrive/cuid2";
 import { pgTable } from "../_table";
 import { text, timestamp, varchar, numeric } from "drizzle-orm/pg-core";
 
-export const rooms = pgTable("room", {
+export const accommodations = pgTable("accomodation", {
   id: varchar("id", { length: 255 })
     .notNull()
     .primaryKey()
@@ -15,7 +15,9 @@ export const rooms = pgTable("room", {
   updatedAt: timestamp("updatedAt", { mode: "date" }).notNull().defaultNow(),
 });
 
-export type Room = typeof rooms.$inferSelect;
-export type RoomUpdate = Partial<typeof rooms.$inferInsert> & {
+export type Accommodation = typeof accommodations.$inferSelect;
+export type AccommodationUpdate = Partial<
+  typeof accommodations.$inferInsert
+> & {
   id: string;
 };

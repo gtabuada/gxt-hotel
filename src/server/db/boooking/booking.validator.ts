@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const createBookingInput = z.object({
-  roomId: z.string().cuid2(),
+  accommodationId: z.string().cuid2(),
   userId: z.string().cuid2(),
   checkInDate: z.date(),
   checkOutDate: z.date(),

@@ -4,19 +4,19 @@ export const sidebarLinks = [
     href: "/",
   },
   {
+    label: "Acomodações",
+    href: "/acomodacoes",
+  },
+  {
+    label: "Reservas",
+    href: "/reservas",
+  },
+  {
     label: "Clientes",
     href: "/clientes",
   },
   {
     label: "Usuários",
     href: "/usuarios",
-  },
-  {
-    label: "Quartos",
-    href: "/quartos",
-  },
-  {
-    label: "Reservas",
-    href: "/reservas",
   },
 ];
