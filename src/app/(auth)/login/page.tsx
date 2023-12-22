@@ -1,13 +1,20 @@
 import Link from "next/link";
 import { UserAuthForm } from "./_components/user-auth-form";
 import { Logo } from "~/components/Logo";
+import Image from "next/image";
 
 export default function Login() {
   return (
     <>
       <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
-          <div className="absolute inset-0 " />
+        <div className="relative hidden h-full flex-col overflow-hidden bg-muted p-10 dark:border-r lg:flex">
+          <Image
+            src="/assets/login-bg.jpg"
+            alt="GXT Hotel"
+            width={1920}
+            height={3054}
+            className="absolute inset-0 h-full w-full bg-cover bg-center opacity-10"
+          />
           <div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
