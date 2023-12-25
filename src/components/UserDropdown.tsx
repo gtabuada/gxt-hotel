@@ -43,7 +43,10 @@ export function UserDropdown({ user }: { user?: User }) {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={signOut}>Sair</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => console.log(user)}>
+          Logar user
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => signOut()}>Sair</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

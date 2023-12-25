@@ -27,7 +27,7 @@ export const users = pgTable("user", {
     mode: "date",
   }).defaultNow(),
   image: varchar("image", { length: 255 }),
-  role: userRoleEnum("role").default("client"),
+  role: userRoleEnum("role").default("client").notNull(),
 });
 
 export type User = typeof users.$inferSelect;

@@ -8,8 +8,8 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata = {
   title: "GXT Hotel",
-  description: "Gestão de quartos, reservas e hóspedes",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  description: "Gestão de alojamento, reservas e hóspedes",
+  icons: [{ rel: "icon", url: "/favicon.svg" }],
 };
 
 export default function RootLayout({
@@ -19,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ptBR" className={GeistSans.className}>
-      <body className="dark">
+      <body className="dark overflow-hidden">
         <TRPCReactProvider cookies={cookies().toString()}>
           {children}
           <Toaster />

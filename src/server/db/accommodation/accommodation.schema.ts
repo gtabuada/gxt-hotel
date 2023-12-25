@@ -21,3 +21,10 @@ export type AccommodationUpdate = Partial<
 > & {
   id: string;
 };
+
+export const accommodationAmenities = pgTable("accommodation_amenities", {
+  accommodationId: text("accommodationId").notNull(),
+  amenityId: text("featureId").notNull(),
+});
+
+export type AccommodationAmenity = typeof accommodationAmenities.$inferSelect;

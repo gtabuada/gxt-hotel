@@ -3,8 +3,8 @@ import { Sidebar } from "~/components/Sidebar";
 import { getServerAuthSession } from "~/server/auth";
 
 export const metadata = {
-  title: "GXT Unit",
-  description: "Gestão GXT",
+  title: "GXT Hotel",
+  description: "Gestão de alojamento, reservas e hóspedes",
 };
 
 export default async function DashboardLayout({

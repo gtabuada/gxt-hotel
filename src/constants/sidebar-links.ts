@@ -20,3 +20,10 @@ export const sidebarLinks = [
     href: "/usuarios",
   },
 ];
+
+export const sidebarLinksAdmin = [
+  {
+    label: "Comodidades",
+    href: "/admin/comodidades",
+  },
+];

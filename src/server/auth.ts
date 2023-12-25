@@ -8,7 +8,8 @@ import GoogleProvider from "next-auth/providers/google";
 import { env } from "~/env";
 import { db } from "~/server/db";
 import { pgTable } from "~/server/db/_table";
-import { type UserRole } from "./db/user/user.schema";
+import { users, type UserRole } from "./db/user/user.schema";
+import { eq } from "drizzle-orm";
 
 declare module "next-auth" {
   interface Session extends DefaultSession {
@@ -17,44 +18,39 @@ declare module "next-auth" {
       role: UserRole;
     } & DefaultSession["user"];
   }
+
+  interface User {
+    id: string;
+    role: UserRole;
+  }
 }
 
-/**
- * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
- *
- * @see https://next-auth.js.org/configuration/options
- */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    async session({ session, user }) {
+      const _user = await db.query.users.findFirst({
+        where: eq(users.id, user.id),
+      });
+
+      if (_user) {
+        session.user.role = _user.role;
+      }
+
+      session.user.id = user.id;
+
+      return session;
+    },
   },
-  adapter: DrizzleAdapter(db, pgTable),
+
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
       clientSecret: env.GOOGLE_CLIENT_SECRET,
     }),
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
   ],
+
+  // @ts-expect-error ...
+  adapter: DrizzleAdapter(db, pgTable),
 };
 
-/**
- * Wrapper for `getServerSession` so that you don't need to import the `authOptions` in every file.
- *
- * @see https://next-auth.js.org/configuration/nextjs
- */
 export const getServerAuthSession = () => getServerSession(authOptions);
