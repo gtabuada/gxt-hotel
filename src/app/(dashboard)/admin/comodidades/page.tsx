@@ -1,27 +1,22 @@
-import { PlusIcon } from "lucide-react";
-import Link from "next/link";
+"use client";
 import { PageContainer } from "~/components/PageContainer";
-import { Button } from "~/components/ui/button";
-import { api } from "~/trpc/server";
+import { api } from "~/trpc/react";
 import { columns } from "./_components/columns";
 import { DataTable } from "./_components/table";
+import { AmenityCreateButton } from "./_components/amenity-create-button";
 
-export default async function Amenity() {
-  const amenities = await api.amenity.getAll.query();
+export default function Amenity() {
+  const { data: amenities } = api.amenity.getAll.useQuery();
 
   return (
     <PageContainer>
       <h2>Gerir comodidades</h2>
       <div className="flex w-full  items-end justify-between">
         <div>
-          <Button>
-            <PlusIcon size={18} className="mr-2" />
-            <Link href="/admin/comodidades/novo">Adicionar comodidade</Link>
-          </Button>
+          <AmenityCreateButton />
         </div>
       </div>
-
-      <DataTable columns={columns} data={amenities} />
+      {amenities && <DataTable columns={columns} data={amenities.reverse()} />}
     </PageContainer>
   );
 }

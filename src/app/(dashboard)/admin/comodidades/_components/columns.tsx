@@ -2,8 +2,11 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 import type { Amenity } from "~/server/db/schema";
-import { DeleteButton, EditButton, SortButton } from "./buttons";
+import { SortButton } from "./buttons";
 import { Icon } from "~/components/Icon";
+import { AmenityDeleteButton } from "./amenity-delete-button";
+import { AmenityEditButton } from "./amenity-edit-button";
+import { useDisclosure } from "~/hooks/useDisclosure";
 
 export const columns: ColumnDef<Amenity>[] = [
   {
@@ -51,12 +54,22 @@ export const columns: ColumnDef<Amenity>[] = [
   {
     header: "Ações",
     cell: ({ row }) => {
-      const amenityId = row.original.id;
+      const [open, handlers] = useDisclosure();
 
       return (
         <div className="flex items-center gap-2">
-          <EditButton amenityId={amenityId} />
-          <DeleteButton amenityId={amenityId} />
+          <AmenityEditButton
+            amenity={row.original}
+            open={open}
+            setOpen={(v) => {
+              if (v === false) {
+                handlers.close();
+              } else {
+                handlers.open();
+              }
+            }}
+          />
+          <AmenityDeleteButton amenity={row.original} />
         </div>
       );
     },

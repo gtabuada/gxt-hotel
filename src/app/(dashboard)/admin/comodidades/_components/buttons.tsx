@@ -1,4 +1,4 @@
-import { ArrowUpDown, PencilIcon, TrashIcon } from "lucide-react";
+import { ArrowUpDown, PencilIcon } from "lucide-react";
 import Link from "next/link";
 import { Button, type ButtonProps } from "~/components/ui/button";
 import {
@@ -21,23 +21,6 @@ export function EditButton({ amenityId }: { amenityId: string }) {
         </TooltipTrigger>
         <TooltipContent>
           <p>Editar</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-}
-
-export function DeleteButton({ amenityId }: { amenityId: string }) {
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <Button variant="destructive" size="icon">
-            <TrashIcon size={18} />
-          </Button>
-        </TooltipTrigger>
-        <TooltipContent>
-          <p>Excluir</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

@@ -1,10 +1,10 @@
 import "~/styles/globals.css";
-import { Toaster } from "~/components/ui/toaster";
 
 import { GeistSans } from "geist/font/sans";
 import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import { Toaster } from "~/components/ui/sonner";
 
 export const metadata = {
   title: "GXT Hotel",
