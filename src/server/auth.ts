@@ -28,13 +28,13 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, user }) {
-      const _user = await db.query.users.findFirst({
-        where: eq(users.id, user.id),
-      });
+      // const _user = await db.query.users.findFirst({
+      //   where: eq(users.id, user.id),
+      // });
 
-      if (_user) {
-        session.user.role = _user.role;
-      }
+      // if (_user) {
+      //   session.user.role = _user.role;
+      // }
 
       session.user.id = user.id;
 

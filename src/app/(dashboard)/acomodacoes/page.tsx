@@ -1,17 +1,9 @@
 import Link from "next/link";
 import { PageContainer } from "~/components/PageContainer";
-import { Button } from "~/components/ui/button";
+import { buttonVariants } from "~/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import { api } from "~/trpc/server";
-import {
-  Table,
-  TableBody,
-  TableRow,
-  TableCaption,
-  TableCell,
-  TableHeader,
-  TableHead,
-} from "~/components/ui/table";
+import { AccommodationCard } from "~/components/AccommodationCard";
 
 export default async function Accommodations() {
   const accommodations = await api.accommodation.getAll.query();
@@ -24,34 +16,19 @@ export default async function Accommodations() {
           {accommodations.length} acomodações encontradas.
         </p>
         <div>
-          <Button>
+          <Link href="/acomodacoes/novo" className={buttonVariants()}>
             <PlusIcon size={18} className="mr-2" />
-            <Link href="/acomodacoes/novo">Adicionar acomodação</Link>
-          </Button>
+            Adicionar acomodação
+          </Link>
         </div>
       </div>
-
-      {accommodations && (
-        <Table>
-          <TableCaption>
-            {accommodations.length} acomodações encontradas.
-          </TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Título</TableHead>
-              <TableHead>Preço</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {accommodations.map((acc) => (
-              <TableRow key={acc.id}>
-                <TableCell className="font-medium">{acc.title}</TableCell>
-                <TableCell>{acc.price}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      )}
+      <div className="flex flex-wrap gap-8">
+        {accommodations.map((acc) => (
+          <Link key={acc.id} href={`/acomodacoes/${acc.id}`}>
+            <AccommodationCard accommodation={acc} />
+          </Link>
+        ))}
+      </div>
     </PageContainer>
   );
 }

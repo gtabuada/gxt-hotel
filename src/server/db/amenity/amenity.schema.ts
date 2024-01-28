@@ -2,6 +2,8 @@ import { integer, text } from "drizzle-orm/pg-core";
 import { pgTable } from "../_table";
 import { createId } from "@paralleldrive/cuid2";
 import type { IconName } from "~/components/Icon";
+import { relations } from "drizzle-orm";
+import { accommodationsToAmenities } from "../schema";
 
 export const amenities = pgTable("amenity", {
   id: text("id")
@@ -18,3 +20,7 @@ export type Amenity = typeof amenities.$inferSelect;
 export type AmenityUpdate = typeof amenities.$inferInsert & {
   id: string;
 };
+
+export const amenitiesRelations = relations(amenities, ({ many }) => ({
+  accommodationsToAmenities: many(accommodationsToAmenities),
+}));

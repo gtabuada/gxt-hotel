@@ -19,16 +19,16 @@ export async function Sidebar() {
         ))}
       </ul>
 
-      {session?.user && checkRole(session.user, "admin") && (
-        <ul>
-          <h4>Administração</h4>
-          {sidebarLinksAdmin.map((link) => (
-            <li key={link.href}>
-              <Link href={link.href}>{link.label}</Link>
-            </li>
-          ))}
-        </ul>
-      )}
+      {/* TODO: fix roles */}
+      {/* {session?.user && checkRole(session.user, "admin") && ( */}
+      <ul>
+        <h4>Administração</h4>
+        {sidebarLinksAdmin.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href}>{link.label}</Link>
+          </li>
+        ))}
+      </ul>
 
       <UserDropdown user={session?.user} />
     </aside>
