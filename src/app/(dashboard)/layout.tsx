@@ -4,7 +4,7 @@ import { getServerAuthSession } from "~/server/auth";
 
 export const metadata = {
   title: "GXT Hotel",
-  description: "Gestão de alojamento, reservas e hóspedes",
+  description: "Gestão de alojamento, reservas e hóspedes.",
 };
 
 export default async function DashboardLayout({
